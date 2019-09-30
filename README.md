@@ -18,7 +18,7 @@ Don't install this.
 
 There will most likely be no automated testing.
 
-### And coding style tests
+### Coding style tests
 
 I said no tests.
 
@@ -34,6 +34,7 @@ The version is 1.0. Forever.
 ## Authors
 
 *Me*
+
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
