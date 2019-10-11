@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Mountain",
+            "request": "launch",
+            "mainClass": "Mountain"
+        }
+    ]
+}
