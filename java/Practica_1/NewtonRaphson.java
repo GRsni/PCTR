@@ -11,7 +11,9 @@ public class NewtonRaphson {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        System.out.print("Escribe el numero de iteraciones: ");
         int steps = in.nextInt();
+        System.out.print("Escribe la primera aproximacion: ");
         double start = in.nextDouble();
         NewtonRaphson entidad = new NewtonRaphson(steps, start);
         entidad.aproximacion();
@@ -21,7 +23,6 @@ public class NewtonRaphson {
 
     void aproximacion() {
         double x = x0;
-        // System.err.println(x);
         for (int i = 0; i < steps; i++) {
             if (Math.abs(functionCos(x)) > 0.00001) {
                 double nextX = x - (functionCos(x) / functionCosDerivative(x));
@@ -33,7 +34,6 @@ public class NewtonRaphson {
     }
 
     double functionCos(double x) {
-        // System.err.println(Math.abs(Math.cos(x) - Math.pow(x, 3)));
         return Math.cos(x) - Math.pow(x, 3);
     }
 
