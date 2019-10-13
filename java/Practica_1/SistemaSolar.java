@@ -10,20 +10,20 @@ public class SistemaSolar {
     Luna luna;
 
     public SistemaSolar(Sol sol, Tierra tierra, Luna luna) {
-        this.sol=sol;
-        this.tierra=tierra;
-        this.luna=luna;
+        this.sol = sol;
+        this.tierra = tierra;
+        this.luna = luna;
     }
 
     public static void main(String[] args) {
-        Sol sol=new Sol();
-        Tierra tierra=new Tierra(sol);
-        Luna luna=new Luna(tierra);
+        Sol sol = new Sol();
+        Tierra tierra = new Tierra(sol);
+        Luna luna = new Luna(tierra);
 
-        SistemaSolar sistemaSolar=new SistemaSolar(sol, tierra, luna);
-        System.out.println( sistemaSolar.sol.toString());
-        System.out.println( sistemaSolar.tierra.toString());
-        System.out.println( sistemaSolar.luna.toString());
-        
+        SistemaSolar sistemaSolar = new SistemaSolar(sol, tierra, luna);
+        System.out.println(sistemaSolar.sol.toString());
+        System.out.println(sistemaSolar.tierra.toString());
+        System.out.println(sistemaSolar.luna.toString());
+
     }
 }

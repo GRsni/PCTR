@@ -1,13 +1,13 @@
+
+/**********************************
+ * Clase NewtonRaphson
+ * 
+ * Autor: Santiago Jesus Mas Peña Fecha: 12/10/2019
+ ***********************************/
+
 import java.util.Scanner;
 
 public class NewtonRaphson {
-    final int steps;
-    final double x0;
-
-    public NewtonRaphson(int steps, double x0) {
-        this.steps = steps;
-        this.x0 = x0;
-    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -15,13 +15,12 @@ public class NewtonRaphson {
         int steps = in.nextInt();
         System.out.print("Escribe la primera aproximacion: ");
         double start = in.nextDouble();
-        NewtonRaphson entidad = new NewtonRaphson(steps, start);
-        entidad.aproximacion();
+        NewtonRaphson.aproximacion(steps, start);
 
         in.close();
     }
 
-    void aproximacion() {
+    public static void aproximacion(int steps, double x0) {
         double x = x0;
         for (int i = 0; i < steps; i++) {
             if (Math.abs(functionCos(x)) > 0.00001) {
@@ -33,11 +32,11 @@ public class NewtonRaphson {
         System.out.println("Resultado: " + x);
     }
 
-    double functionCos(double x) {
+    private static double functionCos(double x) {
         return Math.cos(x) - Math.pow(x, 3);
     }
 
-    double functionCosDerivative(double x) {
+    private static double functionCosDerivative(double x) {
         return -Math.sin(x) - 3 * Math.pow(x, 2);
     }
 

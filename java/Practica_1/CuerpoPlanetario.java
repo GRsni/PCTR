@@ -50,8 +50,8 @@ public class CuerpoPlanetario extends CuerpoAstrofisico {
         return hasAtmosphere;
     }
 
-    public Estrella getCentro() {
-        return centro;
+    public Estrella getParent() {
+        return parent;
     }
 
     public float getAxisTilt() {

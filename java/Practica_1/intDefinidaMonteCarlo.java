@@ -1,35 +1,37 @@
+
+/**********************************
+ * Clase intDefinidaMonteCarlo
+ * 
+ * Autor: Santiago Jesus Mas Peña Fecha: 11/10/2019
+ ***********************************/
+
 import java.util.Scanner;
 
-class intDefinidaMonteCarlo{
-    final int steps;
-
-    public intDefinidaMonteCarlo(int n){
-        steps=n;
-    }
-    
+class intDefinidaMonteCarlo {
 
     public static void main(String[] args) {
-        Scanner in=new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.println("Escribe en numero de iteraciones: ");
-        int steps=in.nextInt();
-        intDefinidaMonteCarlo entidad=new intDefinidaMonteCarlo(steps);
-        entidad.calculaMonteCarlo();
+        int steps = in.nextInt();
+        intDefinidaMonteCarlo.calculaMonteCarlo(steps);
         in.close();
     }
 
-    void calculaMonteCarlo(){
-        int exitos=0;
-        for(int i=0; i<steps; i++){
-            double randX=Math.random();
-            double randY=Math.random();
-            if(randY<=functionX(randX)){
+    public static void calculaMonteCarlo(int steps) {
+        int exitos = 0;
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < steps; i++) {
+            double randX = Math.random();
+            double randY = Math.random();
+            if (randY <= functionX(randX)) {
                 exitos++;
             }
         }
-        System.out.println("Integral aproximada:" +(double)exitos/steps);
+        double timeLapse = (System.currentTimeMillis() - startTime) / 1000.0;
+        System.out.println(String.format("Integral aproximada: %f in %f seconds ", (double) exitos / steps, timeLapse));
     }
 
-    double functionX(double x){
+    private static double functionX(double x) {
         return x;
     }
 

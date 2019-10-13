@@ -12,8 +12,8 @@ public class Sol extends Estrella {
 
     @Override
     public String toString() {
-        return String.format("Nombre: %s, Masa: %d, Radio: %f, Tiempo de vida restante: %f", getName(), getMass(),
-                getRadius(), getLifeSpan());
+        return String.format("Nombre: %s, Masa: %.4f kg, Radio: %f m, Tiempo de vida restante: %f dias", getName(),
+                getMass(), getRadius(), getLifeSpan());
     }
 
 }

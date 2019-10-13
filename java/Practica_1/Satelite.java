@@ -11,22 +11,23 @@ public class Satelite extends CuerpoAstrofisico {
 
     public Satelite(String name, float mass, float axisTilt, float period, float radius, CuerpoPlanetario parent,
             String material) {
-        super(name, mass, axisTilt, period, radius);
+        super(name, mass, period, radius);
         this.parent = parent;
         this.material = material;
-        this.axisTilt=axisTilt;
+        this.axisTilt = axisTilt;
     }
 
     public Satelite(String name, float mass, float axisTilt, float radius, String material) {
-        super(name, mass, axisTilt, radius);
+        super(name, mass, 0f, radius);
         this.material = material;
-        this.axisTilt=axisTilt;
+        this.axisTilt = axisTilt;
     }
 
     public Satelite(String name, float mass, float axisTilt, float period, float radius, String material) {
-        super(name, mass, axisTilt, period, radius);
+        super(name, mass, period, radius);
         this.material = material;
-        this.axisTilt=axisTilt;
+        this.axisTilt = axisTilt;
+        this.axisTilt = axisTilt;
     }
 
     public CuerpoPlanetario getParent() {
@@ -37,7 +38,7 @@ public class Satelite extends CuerpoAstrofisico {
         return material;
     }
 
-    public float getAxisTilt(){
+    public float getAxisTilt() {
         return axisTilt;
     }
 
@@ -49,8 +50,8 @@ public class Satelite extends CuerpoAstrofisico {
         this.material = material;
     }
 
-    public void setAxisTilt(float axisTilt){
-        this.axisTilt=axisTilt;
+    public void setAxisTilt(float axisTilt) {
+        this.axisTilt = axisTilt;
     }
 
 }

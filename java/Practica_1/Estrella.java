@@ -5,27 +5,28 @@
  ***********************************/
 
 public class Estrella extends CuerpoAstrofisico {
-    String lifeSpan, type;
+    String type;
+    float lifeSpan;
 
-    public Estrella(String name, float mass, float period, float radius, String lifeSpan, String type) {
+    public Estrella(String name, float mass, float period, float radius, float lifeSpan, String type) {
         super(name, mass, period, radius);
         this.lifeSpan = lifeSpan;
         this.type = type;
     }
 
-    public Estrella(String name, float mass, float radius, String lifeSpan, String type) {
+    public Estrella(String name, float mass, float radius, float lifeSpan, String type) {
         super(name, mass, radius);
         this.lifeSpan = lifeSpan;
         this.type = type;
     }
 
-    public Estrella(String name, String lifeSpan, String type) {
+    public Estrella(String name, float lifeSpan, String type) {
         super(name);
         this.lifeSpan = lifeSpan;
         this.type = type;
     }
 
-    public String getLifeSpan() {
+    public float getLifeSpan() {
         return lifeSpan;
     }
 
@@ -33,7 +34,7 @@ public class Estrella extends CuerpoAstrofisico {
         return type;
     }
 
-    public void setLifeSpan(String lifeSpan) {
+    public void setLifeSpan(float lifeSpan) {
         this.lifeSpan = lifeSpan;
     }
 
