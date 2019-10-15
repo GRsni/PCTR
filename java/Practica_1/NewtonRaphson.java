@@ -22,9 +22,16 @@ public class NewtonRaphson {
 
     public static void aproximacion(int steps, double x0) {
         double x = x0;
+        // for (int i = 0; i < steps; i++) {
+        //     if (Math.abs(functionCos(x)) > 0.00001) {
+        //         double nextX = x - (functionCos(x) / functionCosDerivative(x));
+        //         System.out.println("Iteracion " + i + " aprox: " + nextX);
+        //         x = nextX;
+        //     }
+        // }
         for (int i = 0; i < steps; i++) {
-            if (Math.abs(functionCos(x)) > 0.00001) {
-                double nextX = x - (functionCos(x) / functionCosDerivative(x));
+            if (Math.abs(functionSquared(x)) > 0.00001) {
+                double nextX = x - (functionSquared(x) / functionSquaredDerivative(x));
                 System.out.println("Iteracion " + i + " aprox: " + nextX);
                 x = nextX;
             }
@@ -40,4 +47,11 @@ public class NewtonRaphson {
         return -Math.sin(x) - 3 * Math.pow(x, 2);
     }
 
+    public static double functionSquared(double x){
+        return x*x-5;
+    }
+
+    public static double functionSquaredDerivative(double x){
+        return 2*x;
+    }
 }

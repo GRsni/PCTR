@@ -1,7 +1,3 @@
-import java.util.Arrays;
-import java.util.Scanner;
-
-import org.w3c.dom.CDATASection;
 
 /**********************************
  * Clase Estadistica
@@ -32,6 +28,7 @@ public class Estadistica {
             int opcion = in.nextInt();
             continua = est.menu(opcion);
         }
+        in.close();
     }
 
     public static int[] leeNumeros(int cantidad, Scanner in) {

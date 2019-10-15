@@ -23,7 +23,7 @@ class intDefinidaMonteCarlo {
         for (int i = 0; i < steps; i++) {
             double randX = Math.random();
             double randY = Math.random();
-            if (randY <= functionX(randX)) {
+            if (randY <= functionSin(randX)) {
                 exitos++;
             }
         }
@@ -33,6 +33,10 @@ class intDefinidaMonteCarlo {
 
     private static double functionX(double x) {
         return x;
+    }
+
+    private static double functionSin(double x){
+        return Math.sin(x);
     }
 
 }
