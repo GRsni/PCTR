@@ -1,5 +1,4 @@
 /**
- * 
  * Clase Usa_Hebra
  * 
  * @author Santiago Jesus Mas Peña
@@ -8,7 +7,7 @@
 
 public class Usa_Hebra {
     public static void main(String[] args) throws InterruptedException {
-        int cant = 1000000;
+        int cant = 10000;
         Hebra hebra1 = new Hebra(true, cant);
         Hebra hebra2 = new Hebra(false, cant);
 

@@ -8,19 +8,23 @@
 
 public class Hebra extends Thread {
     private static int n = 0;
-    private int cant = 10000;
+    private int cant;
     private boolean increment;
 
-    public Hebra(boolean inc, int cont) {
+    public Hebra(boolean inc, int cant) {
         this.increment = inc;
-        this.cant=cont;
+        this.cant=cant;
+    }
+
+    public Hebra(boolean inc){
+        this(inc, 10000);
     }
 
     public void run() {
-        for (int i = 0; i < cant; i++) {
-            n = n + (increment ? 1 : -1);
-            // System.err.println("n= " + n);
-        }
+       for(int i=0; i<cant; i++){
+           if(increment) n++;
+           else n--;
+       }
     }
 
     public static int getN() {
