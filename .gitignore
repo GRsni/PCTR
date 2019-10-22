@@ -1,6 +1,6 @@
 /teoria/
-*class
-*pdf
-java/.vscode/
-*png
-*jpg
+*.class
+*.pdf
+*.json
+*.png
+*.jpg

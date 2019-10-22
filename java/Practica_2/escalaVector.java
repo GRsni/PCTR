@@ -23,12 +23,13 @@ public class escalaVector {
     }
 
     public static void main(String[] args) {
-        escalaVector esc=new escalaVector(100000000);
-        long time=System.currentTimeMillis();
-        for(int i=0; i<esc.tam; i++){
-            esc.vector[i]*=5;
+        escalaVector esc = new escalaVector(10000000);
+        long time = System.currentTimeMillis();
+        for (int i = 0; i < esc.tam; i++) {
+            esc.vector[i] *= 5;
+            // System.out.println("Vector before: " + esc.vector[i]);
         }
-        System.out.println("Tiempo: "+(System.currentTimeMillis()-time)/1000.0);
+        System.out.println("Tiempo: " + (System.currentTimeMillis() - time) / 1000d);
     }
 
 }
