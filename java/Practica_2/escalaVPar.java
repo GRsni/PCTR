@@ -20,4 +20,8 @@
             vector[i]*=escalado;
         }
     }
+
+    public run(){
+        
+    }
  }
