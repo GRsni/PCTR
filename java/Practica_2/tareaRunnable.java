@@ -6,22 +6,27 @@
  */
 
 public class tareaRunnable implements Runnable {
-    Critica critica;
+    static int n = 0;
     boolean incremento;
+    int iter;
 
-    public tareaRunnable(Critica crit, boolean incremento) {
-        this.critica = crit;
+    public tareaRunnable(boolean incremento, int iter) {
         this.incremento = incremento;
+        this.iter = iter;
     }
 
     public void run() {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < iter; i++) {
             if (incremento) {
-                critica.inc();
+                n++;
             } else {
-                critica.dec();
+                n--;
             }
         }
+    }
+
+    static int getN() {
+        return n;
     }
 
 }
