@@ -7,27 +7,29 @@
 
 public class escalaVector {
     public int tam;
-    public double[] vector;
+    public int[] vector;
 
     public escalaVector(int tam) {
         this.tam = tam;
         vector = rellenaVector(tam);
     }
 
-    private double[] rellenaVector(int tam) {
-        double[] vector = new double[tam];
+    private int[] rellenaVector(int tam) {
+        int[] vector = new int[tam];
         for (int i = 0; i < tam; i++) {
-            vector[i] = Math.random() * 10;
+            vector[i] = (int) (Math.random() * 10);
         }
         return vector;
     }
 
     public static void main(String[] args) {
-        escalaVector esc = new escalaVector(10000000);
+        escalaVector esc = new escalaVector(1000);
         long time = System.currentTimeMillis();
         for (int i = 0; i < esc.tam; i++) {
             esc.vector[i] *= 5;
-            // System.out.println("Vector before: " + esc.vector[i]);
+            if (i % 5000 == 0) {
+                System.out.println("Vector[" + i + "]: " + esc.vector[i]);
+            }
         }
         System.out.println("Tiempo: " + (System.currentTimeMillis() - time) / 1000d);
     }
