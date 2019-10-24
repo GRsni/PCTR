@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Clase escalaVPar
  * 
@@ -7,37 +9,43 @@
 public class escalaVPar extends Thread {
     private int start, end;
     float escalado;
-    float[] vector;
+    static int[] vector;
 
     /**
-     * 
+     * @param vector   vector de enteros a
      * @param start    indice inicio del vector
      * @param end      indice final del vector
      * @param escalado factor por el que multiplicar el vector
      */
-    public escalaVPar(float[] vector, int start, int end, float escalado) {
-        this.vector = vector;
+    public escalaVPar(int start, int end, float escalado) {
         this.start = start;
         this.end = end;
         this.escalado = escalado;
     }
 
     public static void main(String[] args) throws InterruptedException {
-        float[] vector = new float[10000000];
-        escalaVPar.rellenaVector(vector);
+        if (args.length < 1) {
+            System.out.println("Debe introducir el tamaño del vector.");
+            System.exit(-1);
+        }
+        int tamVector = Integer.parseInt(args[0]);
+        vector = new int[tamVector];
+        vector = escalaVPar.rellenaVector(tamVector);
 
-        escalaVPar escala1 = new escalaVPar(vector, 0, (int) Math.floor(vector.length / 2), 5);
-        escalaVPar escala2 = new escalaVPar(vector, (int) Math.floor(vector.length / 2), vector.length, 5);
+        escalaVPar[] hilosVPars = new escalaVPar[4];
+        for (int i = 0; i < 4; i++) {
+            hilosVPars[i] = new escalaVPar((int) (tamVector / 4.0 * i), (int) (tamVector / 4.0 * (i + 1)), 5);
+        }
 
-        escala1.start();
-        escala2.start();
-
-        escala1.join();
-        escala2.join();
-
-        escala1.imprimeVector();
-        escala2.imprimeVector();
-
+        for (int i = 0; i < 4; i++) {
+            hilosVPars[i].start();
+        }
+        for (int i = 0; i < 4; i++) {
+            hilosVPars[i].join();
+        }
+        for (int i = 0; i < 4; i++) {
+            hilosVPars[i].imprimeVector();
+        }
     }
 
     public void run() {
@@ -46,10 +54,12 @@ public class escalaVPar extends Thread {
         }
     }
 
-    public static void rellenaVector(float[] vector) {
-        for (int i = 0; i < vector.length; i++) {
-            vector[i] = (float) Math.random();
+    public static int[] rellenaVector(int tam) {
+        int[] vector = new int[tam];
+        for (int i = 0; i < tam; i++) {
+            vector[i] = (int) (Math.random() * 10);
         }
+        return vector;
     }
 
     public void imprimeVector() {

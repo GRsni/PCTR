@@ -9,7 +9,7 @@ public class tareaRunnable implements Runnable {
     static int n = 0;
     boolean incremento;
     int iter;
-
+    
     public tareaRunnable(boolean incremento, int iter) {
         this.incremento = incremento;
         this.iter = iter;
