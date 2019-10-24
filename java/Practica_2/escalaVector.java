@@ -23,7 +23,13 @@ public class escalaVector {
     }
 
     public static void main(String[] args) {
-        escalaVector esc = new escalaVector(10000000);
+        if (args.length < 1) {
+            System.out.println("Debe introducir el tamaño del vector.");
+            System.exit(-1);
+        }
+        int tamVector = Integer.parseInt(args[0]);
+        escalaVector esc = new escalaVector(tamVector);
+
         long time = System.currentTimeMillis();
         for (int i = 0; i < esc.tam; i++) {
             esc.vector[i] *= 5;
