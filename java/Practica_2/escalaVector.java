@@ -33,7 +33,7 @@ public class escalaVector {
         long time = System.currentTimeMillis();
         for (int i = 0; i < esc.tam; i++) {
             esc.vector[i] *= 5;
-            if (i % 5000 == 0) {
+            if (i % 1000 == 0) {
                 System.out.println("Vector[" + i + "]: " + esc.vector[i]);
             }
         }

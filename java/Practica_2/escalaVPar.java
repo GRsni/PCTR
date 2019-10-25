@@ -29,23 +29,24 @@ public class escalaVPar extends Thread {
             System.exit(-1);
         }
         int tamVector = Integer.parseInt(args[0]);
+        int numHilos = 2;
         vector = new int[tamVector];
         vector = escalaVPar.rellenaVector(tamVector);
 
         escalaVPar[] hilosVPars = new escalaVPar[4];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < numHilos; i++) {
             hilosVPars[i] = new escalaVPar((int) (tamVector / 4.0 * i), (int) (tamVector / 4.0 * (i + 1)), 5);
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < numHilos; i++) {
             hilosVPars[i].start();
         }
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < numHilos; i++) {
             hilosVPars[i].join();
         }
-        for (int i = 0; i < 4; i++) {
-            hilosVPars[i].imprimeVector();
-        }
+        // for (int i = 0; i < numHilos; i++) {
+        //     hilosVPars[0].imprimeVector();
+        // }
     }
 
     public void run() {
