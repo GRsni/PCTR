@@ -29,32 +29,33 @@ public class escalaVPar extends Thread {
             System.exit(-1);
         }
         int tamVector = Integer.parseInt(args[0]);
-        int numHilos = 2;
         vector = new int[tamVector];
         vector = escalaVPar.rellenaVector(tamVector);
 
-        escalaVPar[] hilosVPars = new escalaVPar[4];
-        for (int i = 0; i < numHilos; i++) {
-            hilosVPars[i] = new escalaVPar((int) (tamVector / 4.0 * i), (int) (tamVector / 4.0 * (i + 1)), 5);
-        }
+        escalaVPar hilo1=new escalaVPar(0, tamVector/2, 5);
+        escalaVPar hilo2=new escalaVPar(tamVector/2, tamVector, 5);
 
-        for (int i = 0; i < numHilos; i++) {
-            hilosVPars[i].start();
-        }
-        for (int i = 0; i < numHilos; i++) {
-            hilosVPars[i].join();
-        }
-        // for (int i = 0; i < numHilos; i++) {
-        //     hilosVPars[0].imprimeVector();
-        // }
+        hilo1.start();
+        hilo2.start();
+
+        hilo1.join();
+        hilo2.join();
     }
 
+    /**
+     * Metodo concurrente, realiza el escalado del vector
+     */
     public void run() {
         for (int i = start; i < end; i++) {
             vector[i] *= escalado;
         }
     }
 
+    /**
+     * Crea y rellena un vector de enteros de tamaño tam, con valores entre 0 y 9
+     * @param tam Tamaño del vector a crear
+     * @return Devuelve el vector de enteros creado
+     */
     public static int[] rellenaVector(int tam) {
         int[] vector = new int[tam];
         for (int i = 0; i < tam; i++) {
@@ -63,6 +64,9 @@ public class escalaVPar extends Thread {
         return vector;
     }
 
+    /**
+     * Imprime el segmento de vector de enteros desde start hasta end
+     */
     public void imprimeVector() {
         for (int i = start; i < end; i++) {
             System.out.print(vector[i] + ", ");

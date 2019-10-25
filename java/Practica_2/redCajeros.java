@@ -6,6 +6,9 @@
  */
 public class redCajeros {
 
+    /**
+     * Constructor por defecto de clase redCajeros
+     */
     public redCajeros() {
     }
 

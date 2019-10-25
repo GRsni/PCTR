@@ -13,7 +13,11 @@ public class escalaVector {
         this.tam = tam;
         vector = rellenaVector(tam);
     }
-
+     /**
+      * Crea un vector de enteros de tamaño tam con valores aleatorios entre 0 y 9
+      * @param tam El tamaño del vector a rellenar
+      * @return Devuelve el vector de enteros
+      */
     private int[] rellenaVector(int tam) {
         int[] vector = new int[tam];
         for (int i = 0; i < tam; i++) {

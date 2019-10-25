@@ -11,15 +11,19 @@ public class Hebra extends Thread {
     private int cant;
     private boolean increment;
 
+    /**
+     * Constructor de clase Hebra
+     * @param inc Selector de incremento/decremento
+     * @param cant Numero de iteraciones a realizar
+     */
     public Hebra(boolean inc, int cant) {
         this.increment = inc;
         this.cant=cant;
     }
 
-    public Hebra(boolean inc){
-        this(inc, 10000);
-    }
-
+    /**
+     * Metodo concurrente, incrementa o decrementa la variable de clase n cant numero de veces
+     */
     public void run() {
        for(int i=0; i<cant; i++){
            if(increment) n++;
@@ -27,6 +31,10 @@ public class Hebra extends Thread {
        }
     }
 
+    /**
+     * Metodo observador de la variable n
+     * @return Devuelve la variable de clase n
+     */
     public static int getN() {
         return n;
     }
