@@ -33,19 +33,23 @@ public class escalaVPar extends Thread {
         vector = new int[tamVector];
         vector = escalaVPar.rellenaVector(tamVector);
 
-        escalaVPar[] hilosVPars = new escalaVPar[4];
-        for (int i = 0; i < numHilos; i++) {
-            hilosVPars[i] = new escalaVPar((int) (tamVector / 4.0 * i), (int) (tamVector / 4.0 * (i + 1)), 5);
-        }
+        escalaVPar hilo1 = new escalaVPar(0, tamVector / 4, 5);
+        escalaVPar hilo2 = new escalaVPar(tamVector / 4, tamVector / 2, 5);
+        escalaVPar hilo3 = new escalaVPar(tamVector / 2, tamVector / 4 * 3, 5);
+        escalaVPar hilo4 = new escalaVPar(tamVector / 4 * 3, tamVector, 5);
 
-        for (int i = 0; i < numHilos; i++) {
-            hilosVPars[i].start();
-        }
-        for (int i = 0; i < numHilos; i++) {
-            hilosVPars[i].join();
-        }
+        hilo1.start();
+        hilo2.start();
+        hilo3.start();
+        hilo4.start();
+
+        hilo1.join();
+        hilo2.join();
+        hilo3.join();
+        hilo4.join();
+
         // for (int i = 0; i < numHilos; i++) {
-        //     hilosVPars[0].imprimeVector();
+        // hilosVPars[0].imprimeVector();
         // }
     }
 
