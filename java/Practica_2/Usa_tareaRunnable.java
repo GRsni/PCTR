@@ -7,9 +7,6 @@
 
 public class Usa_tareaRunnable extends Thread {
 
-    public Usa_tareaRunnable() {
-    }
-
     public static void main(String[] args) throws InterruptedException {
         if(args.length<1){
             System.out.println("Debe introducir el numero de iteraciones.");
