@@ -1,3 +1,9 @@
+/**
+ * Clase prodEscalar
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 31/10/19
+ */
 public class prodEscalar {
 
     public static void main(String[] args) {
@@ -13,6 +19,12 @@ public class prodEscalar {
         System.out.println("Tiempo: " + (System.nanoTime() - timeStart) / 100000000.0 +" seconds.");
     }
 
+    /**
+     * Metodo estatico. Realiza el producto vectorial de dos vectores
+     * @param v1 Vector a multiplicar
+     * @param v2 Vector a multiplicar
+     * @return Devuelve el producto vectorial de ambos vectores
+     */
     public static int productoEsc(int[] v1, int[] v2) {
         int sum = 0;
         for (int i = 0; i < v1.length; i++) {
