@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Clase matVector
  * 
@@ -18,11 +20,19 @@ public class matVector {
             vector[i] = (int) (Math.random() * 10);
         }
         long timeStart = System.nanoTime();
-        int[] res = matVector.multiply(matrix, vector);`
-        System.out.println(
-                "El tiempo tardado en realizar el producto es:" + (System.nanoTime() - timeStart) / 1000000000.0);
+        int[] res = matVector.multiply(matrix, vector);
+        System.out.println(Arrays.toString(res));
+        System.out.println("El tiempo tardado en realizar el producto es:"
+                + (System.nanoTime() - timeStart) / 1000000000.0 + " segundos.");
+
     }
 
+    /**
+     * Metodo estático. Realiza el producto de una matriz por un vector
+     * @param matrix Matriz a multiplicar
+     * @param vector Vector a multiplicar
+     * @return Devuelve el vector resultado del producto
+     */
     public static int[] multiply(int[][] matrix, int[] vector) {
         int[] res = new int[vector.length];
 

@@ -1,9 +1,24 @@
 import java.util.Arrays;
 
+/**
+ * Clase prodEscalarParalelo
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 31/10/19
+ */
 public class prodEscalarParalelo extends Thread {
     int[] prodParcial, u, v;
     int idHebra, inicio, fin;
 
+    /**
+     * Constructor de clase. 
+     * @param idHebra Identificador de hebra
+     * @param inicio Indice del primer valor a multiplicar
+     * @param fin Indice del ultimo valor a multiplicar
+     * @param prodParcial Referencia al vector donde se almacena el resultado parcial del producto vectorial
+     * @param u Referencia al vector a multiplicar
+     * @param v Referencia al vector a multiplicar
+     */
     public prodEscalarParalelo(int idHebra, int inicio, int fin, int[] prodParcial, int[] u, int[] v) {
         this.idHebra = idHebra;
         this.inicio = inicio;
@@ -51,16 +66,27 @@ public class prodEscalarParalelo extends Thread {
 
     }
 
+    /**
+     * Metodo paralelo. Realiza el producto vectorial entre u y v, y almacena el resultado en prodParcial
+     */
     public void run() {
         for (int i = inicio; i < fin; i++) {
             prodParcial[idHebra] += u[i] * v[i];
         }
     }
 
+    /**
+     * Metodo observador
+     * @return Devuelve el indice del primer valor a multiplicar
+     */
     public int getInicio() {
         return inicio;
     }
 
+    /**
+     * Metodo observador
+     * @return Devuelve el indice del ultimo valor a multiplicar
+     */
     public int getFin() {
         return fin;
     }
