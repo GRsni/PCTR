@@ -5,7 +5,7 @@ import java.io.RandomAccessFile;
 public class ficheroSeguro extends Thread {
     static Object cerrojo = new Object();
     static RandomAccessFile archivo;
-    static int iter = 20;
+    static int iter = f;
 
     public void run() {
         int num = (int) Math.random() * 10;
