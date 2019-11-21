@@ -3,13 +3,14 @@
 /* Algoritmo de Dekker */
 class Dekker {
     /* Iteraciones que dara cada hilo */
-    static final int iteraciones = 2000000;
+    static final int iteraciones = 20000;
     /* Recurso compartido */
     static volatile int enteroCompartido = 0;
     /* Representa el deseo del hilo P de entrar en la seccion critica */
     static volatile boolean wantp = false;
     /* Representa el deseo del hilo Q de entrar en la seccion critica */
     static volatile boolean wantq = false;
+    /* Representa el deseo del hilo R de entrar en la seccion critica */
     static volatile boolean wantr = false;
     /* Representa de quien es el turno */
     static volatile int turn = 1;
@@ -19,7 +20,7 @@ class Dekker {
             for (int i = 0; i < iteraciones; ++i) {
                 /* Seccion no critica */
                 wantp = true;
-                while (wantq || wantr) {
+                while (wantq) {
                     if (turn != 1) {
                         wantp = false;
                         while (turn != 1)
@@ -43,8 +44,8 @@ class Dekker {
             for (int i = 0; i < iteraciones; ++i) {
                 /* Seccion no critica */
                 wantq = true;
-                while (wantp || wantr) {
-                    if (turn != 2) {
+                while (wantp) {
+                    if (turn == 1) {
                         wantq = false;
                         while (turn != 2)
                             Thread.yield();
@@ -56,32 +57,8 @@ class Dekker {
                 --enteroCompartido;
                 /* Fin Seccion critica */
 
-                turn = 3;
-                wantq = false;
-            }
-        }
-    }
-
-    class R extends Thread {
-        public void run() {
-            for (int i = 0; i < iteraciones; ++i) {
-                /* Seccion no critica */
-                wantr = true;
-                while (wantp || wantq) {
-                    if (turn != 3) {
-                        wantr = false;
-                        while (turn != 3)
-                            Thread.yield();
-                        wantr = true;
-                    }
-                }
-
-                /* Seccion critica */
-                --enteroCompartido;
-                /* Fin Seccion critica */
-
                 turn = 1;
-                wantr = false;
+                wantq = false;
             }
         }
     }
@@ -89,29 +66,30 @@ class Dekker {
     Dekker() {
         Thread p = new P();
         Thread q = new Q();
-        Thread r = new R();
         p.start();
         q.start();
-        r.start();
         try {
             p.join();
             q.join();
-            r.join();
-            System.out.println("El valor del recurso compartido es " + enteroCompartido);
-            System.out.println("Deberia ser " + iteraciones);
+            // System.out.println("El valor del recurso compartido es " + enteroCompartido);
+            // System.out.println("Deberia ser " + iteraciones);
         } catch (InterruptedException e) {
         }
     }
 
     public static void main(String[] args) {
         int contador = 0;
-        // while (enteroCompartido == 2000000) {
-        new Dekker();
-        // contador++;
-        // if (contador % 10000 == 0) {
-        // System.out.println(contador);
-        // }
-        // }
+        double totalTime = 0;
+        while (enteroCompartido == 0) {
+            long timeStart = System.nanoTime();
+            new Dekker();
+            contador++;
+            totalTime += (System.nanoTime() - timeStart) / 1000000000.0;
+            if (contador % 1000 == 0) {
+                System.out.println(contador + " in " + totalTime);
+                totalTime = 0;
+            }
+        }
         System.out.println("Error de programa en iteracion: " + contador);
     }
 }

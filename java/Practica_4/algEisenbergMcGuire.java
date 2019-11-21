@@ -10,16 +10,23 @@ import java.util.concurrent.TimeUnit;
  */
 public class algEisenbergMcGuire implements Runnable {
     static int turno = 0;
-    static int iter = 1000000;
+    static int iter = 10000000;
     static int n = 0;
     static pstate[] flags = new pstate[2];
     private int id;
     private boolean incrementa;
 
+    /**
+     * Enumerador de estados
+     */
     public enum pstate {
         IDLE, WAITING, ACTIVE;
     }
 
+    /**
+     * Metodo concurrente bajo el protocolo de entrada y salida del algoritmo de
+     * Eisenberg-McGuire
+     */
     public void run() {
         for (int i = 0; i < iter; i++) {
             int index;
@@ -64,6 +71,13 @@ public class algEisenbergMcGuire implements Runnable {
         }
     }
 
+    /**
+     * Constructor de clase algEisenbergMcGuire
+     * 
+     * @param id         identificador del proceso
+     * @param incrementa bandera que indica si el proceso incrementa o decrementa la
+     *                   variable comun n
+     */
     public algEisenbergMcGuire(int id, boolean incrementa) {
         this.id = id;
         this.incrementa = incrementa;

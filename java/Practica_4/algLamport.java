@@ -18,6 +18,9 @@ public class algLamport implements Runnable {
     static List<Boolean> entrando = new ArrayList<>(num_procesos);
     static List<Integer> cola = new ArrayList<>(num_procesos);
 
+    /**
+     * Metodo concurrente
+     */
     public void run() {
         for (int i = 0; i < iter; i++) {
             bloquear(id);
@@ -25,6 +28,12 @@ public class algLamport implements Runnable {
         }
     }
 
+    /**
+     * Metodo que realiza el acceso a la sección critica, siguiendo el protocolo de
+     * entrada del algoritmo de Lamport
+     * 
+     * @param id indice del proceso en la cola
+     */
     private void bloquear(int id) {
         entrando.set(id, true);
         int max = 0;
@@ -54,10 +63,22 @@ public class algLamport implements Runnable {
         /* Fin de seccion critica */
     }
 
+    /**
+     * Eliminar el proceso de la cola de procesos con intención de entrar
+     * 
+     * @param id indice del proceso en la cola
+     */
     private void soltar(int id) {
         cola.set(id, 0);
     }
 
+    /**
+     * Constructor de hebra algLamport
+     * 
+     * @param id         indice del proceso
+     * @param incrementa bandera que determina si incrementa o decrementa la
+     *                   variable comun n
+     */
     public algLamport(int id, boolean incrementa) {
         this.id = id;
         this.incrementa = incrementa;
@@ -66,7 +87,7 @@ public class algLamport implements Runnable {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService ejecutor = Executors.newFixedThreadPool(num_procesos);
 
-        for(int i=0; i<num_procesos; i++){
+        for (int i = 0; i < num_procesos; i++) {
             cola.add(0);
             entrando.add(false);
         }
