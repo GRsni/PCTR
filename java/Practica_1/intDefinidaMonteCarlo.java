@@ -35,7 +35,7 @@ class intDefinidaMonteCarlo {
         return x;
     }
 
-    private static double functionSin(double x){
+    private static double functionSin(double x) {
         return Math.sin(x);
     }
 

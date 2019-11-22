@@ -1,3 +1,4 @@
+
 // import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,11 +11,12 @@ public class randomDataFile {
     static Scanner sc = new Scanner(System.in);
     static RandomAccessFile fichero = null;
     static Random gcl = new Random();
+
     public static void main(String[] args) {
         try {
             fichero = new RandomAccessFile("enteros.dat", "rw");
-            for(int i=1; i<=10; i++)
-              fichero.writeInt(gcl.nextInt());       
+            for (int i = 1; i <= 10; i++)
+                fichero.writeInt(gcl.nextInt());
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
