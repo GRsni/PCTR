@@ -23,8 +23,9 @@ public class volcadoRed {
       iniTiempo = System.nanoTime();
       while (linea != null) {
         linea = (String) direcciones.readLine();
-        if (linea != null)
+        if (linea != null) {
           tareas.add(new tareaRed(linea, cont));
+        }
         cont++;
       }
       direcciones.close();
