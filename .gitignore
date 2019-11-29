@@ -4,6 +4,7 @@
 *.json
 *.png
 *.jpg
-*.ods#
+*.ods
 *.bin
 *.dat
+

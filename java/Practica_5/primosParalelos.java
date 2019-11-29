@@ -1,5 +1,5 @@
 
-/*primosParalelos.java
+/**primosParalelos.java
  *@author A.T.
 */
 import java.util.concurrent.*;
