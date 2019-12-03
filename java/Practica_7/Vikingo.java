@@ -1,11 +1,10 @@
 public class Vikingo extends Thread {
     drakkarVikingo marmita;
-    int tipo;
-    int id;
+    int tipo, id;
 
     public Vikingo(drakkarVikingo m, int id) {
         marmita = m;
-        this.tipo = (id > 1 ? 0 : 1);
+        this.tipo = (id > 1 ? 1 : 2);
         this.id = id;
     }
 
