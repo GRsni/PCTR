@@ -2,11 +2,12 @@ import java.util.Random;
 
 public class intParalelomultiCont implements Runnable {
     Random generador;
-    static int puntos = 250000;
+    int puntos;
     int sum = 0;
     static int cont = 0;
 
-    public intParalelomultiCont() {
+    public intParalelomultiCont(int puntos) {
+        this.puntos = puntos;
         generador = new Random(System.nanoTime());
     }
 
@@ -17,6 +18,7 @@ public class intParalelomultiCont implements Runnable {
             if (inArea(x, y))
                 sum++;
         }
+        cont += sum;
     }
 
     private boolean inArea(float x, float y) {
@@ -32,20 +34,20 @@ public class intParalelomultiCont implements Runnable {
         float coef = 0;
         int numHilos = (int) (numCores / (1 - coef));
 
+        int puntosTotales = Integer.parseInt(args[0]);
+
         Thread hilos[] = new Thread[numHilos];
         long timeStart = System.nanoTime();
         for (int i = 0; i < numHilos; i++) {
-            hilos[i] = new Thread(new intParalelomultiCont());
+            hilos[i] = new Thread(new intParalelomultiCont(puntosTotales / numHilos));
             hilos[i].start();
         }
 
         for (int i = 0; i < numHilos; i++) {
             hilos[i].join();
         }
-        for (int i = 0; i < numHilos; i++) {
-            cont += hilos[i].getSum();
-        }
-        System.out.println("Estimacion: " + cont / 1000000.0 + " en " + (System.nanoTime() - timeStart) / 1000000000.0
-                + " segundos");
+
+        System.out.println("Estimacion: " + cont / (float) puntosTotales + " en "
+                + (System.nanoTime() - timeStart) / 1000000000.0 + " segundos");
     }
 }

@@ -2,7 +2,7 @@
 /*tareaRed.java
  @author A.Tomeu
 */
-import java.util.*;
+
 import java.io.*;
 import java.net.*;
 

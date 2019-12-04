@@ -54,8 +54,12 @@ public class Conductor {
         return puntos;
     }
 
-    public synchronized void setPuntos(int puntos) {
-        this.puntos = puntos;
+    public synchronized void sumarPuntos(int puntos) {
+        this.puntos += puntos;
+    }
+
+    public synchronized void restarPuntos(int puntos) {
+        this.puntos -= puntos;
     }
 
 }
