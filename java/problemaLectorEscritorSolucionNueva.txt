@@ -1,0 +1,13 @@
+static int leyendo = 0;
+
+
+LECTOR                                      ESCRITOR
+loop                                        loop   
+    region A                                    region A when leyendo==0
+        leyendo++                                   escribir()
+    end                                         end
+    leer()                                   end
+    region A
+        leyendo--
+    end
+end

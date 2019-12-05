@@ -1,0 +1,22 @@
+monitor semaforo;
+  var           
+    s: integer;
+    cola_procesos: condition;
+    
+  procedure wait();
+  begin
+    if(s>0) 
+      then s:=s-1;
+      else wait(cola_procesos); 
+  end;
+  
+  procedure signal();
+  begin
+    if(cola_procesos.no_vacia())
+      then send(cola_procesos);
+      else s:=s+1;  
+  end;
+  
+  begin (*codigo de inicializacion*)
+    s=valor_inicial;  
+  end.
