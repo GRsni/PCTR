@@ -1,15 +1,15 @@
 //MONITOR DE CONTROL DE UN SISTEMA DE TRES IMPRESORAS
-//SUPONER SEMÁNTICA DE SEÑALIZACIÓN SC
+//SUPONER SEMï¿½NTICA DE SEï¿½ALIZACIï¿½N SC
 
 monitor impresoras;
-  var                         //las variables en java serán privada...
+  var                         //las variables en java serÃ¡n privada...
     i, impresoras: integer;
     libre: array[1..3] of boolean;
     imp: condition;
     
   procedure integer take_print();
   begin
-    if(impresoras==0) then wait(imp); //esto en java llevará una guarda...
+    if(impresoras==0) then wait(imp); //esto en java llevarÃ¡ una guarda...
     n:=1;
     while not(libre[n]) do n++;
     libre[n]:=false;
@@ -21,7 +21,7 @@ monitor impresoras;
   begin
     libre[n]:=true;
     impresoras++;
-    send(imp);          //esto en java será notifyAll()
+    send(imp);          //esto en java serÃ¡ notifyAll()
   end;
   
   begin

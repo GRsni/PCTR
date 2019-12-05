@@ -19,7 +19,7 @@ public class ServidorHilosinPool implements Runnable {
             int i = Integer.valueOf(datos).intValue();
             for (j = 1; j <= 20; j++) {
                 System.out.println("El hilo " + this.id + " escribiendo el dato " + i);
-                Thread.currentThread().sleep(2000);
+                // Thread.currentThread().sleep(2000);
             }
             enchufe.close();
             System.out.println("El hilo " + this.id + "cierra su conexion...");

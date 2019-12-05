@@ -1,0 +1,27 @@
+Semaforo teorico:
+S: integer
+Tarea_espera: Condition
+
+
+Proceduro Wait():
+begin  
+    if S==0 then 
+        wait(Tarea_espera)
+    else 
+        s--
+    end
+end
+
+procedure signal():
+begin 
+    if !vacia(Tarea_espera) then 
+        send(Tarea_espera)
+    else 
+        s++
+    end
+end
+
+inicialización(valor_inicial: integer):
+begin
+    S=valor_inicial
+end
