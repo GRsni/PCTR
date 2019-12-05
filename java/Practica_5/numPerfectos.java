@@ -7,16 +7,17 @@ import java.util.*;
 /**
  * Clase numPerfectos
  * 
- * @author Santiago Jesus Mas Peña 
+ * @author Santiago Jesus Mas Peña
  * @version 22/11/19
  */
-public class numPerfectos implements Callable {
+public class numPerfectos implements Callable<Integer> {
     int start, end;
 
     /**
      * Constructor de clase, recibe el inicio y final del intervalo de calculo
+     * 
      * @param start Primer elemento a calcular
-     * @param end Ultimo elemento a calcular
+     * @param end   Ultimo elemento a calcular
      */
     public numPerfectos(int start, int end) {
         this.start = start;
@@ -24,7 +25,8 @@ public class numPerfectos implements Callable {
     }
 
     /**
-     * Metodo callable, ejecutado de manera concurrente y almacenado en un objeto de clase Future<Integer>
+     * Metodo callable, ejecutado de manera concurrente y almacenado en un objeto de
+     * clase Future<Integer>
      */
     public Integer call() {
         int perfectos = 0;

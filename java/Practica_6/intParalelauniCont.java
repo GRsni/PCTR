@@ -1,12 +1,13 @@
 import java.util.Random;
 
 public class intParalelauniCont implements Runnable {
-    static int puntos = 250000;
+    int puntos;
     static int cont = 0;
     static Object cerrojo = new Object();
     Random generador;
 
-    public intParalelauniCont() {
+    public intParalelauniCont(int puntos) {
+        this.puntos = puntos;
         generador = new Random(System.nanoTime());
     }
 
@@ -30,17 +31,19 @@ public class intParalelauniCont implements Runnable {
         float coef = 0;
         int numHilos = (int) (numCores / (1 - coef));
 
+        int puntosTotales = Integer.parseInt(args[0]);
+
         Thread hilos[] = new Thread[numHilos];
         long timeStart = System.nanoTime();
         for (int i = 0; i < numHilos; i++) {
-            hilos[i] = new Thread(new intParalelauniCont());
+            hilos[i] = new Thread(new intParalelauniCont(puntosTotales / numHilos));
             hilos[i].start();
         }
 
         for (int i = 0; i < numHilos; i++) {
             hilos[i].join();
         }
-        System.out.println("Estimacion: " + cont / 1000000.0 + " en " + (System.nanoTime() - timeStart) / 1000000000.0
-                + " segundos");
+        System.out.println("Estimacion: " + cont / (float) puntosTotales + " en "
+                + (System.nanoTime() - timeStart) / 1000000000.0 + " segundos");
     }
 }
