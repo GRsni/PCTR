@@ -31,7 +31,7 @@ public class volcadoRed {
       direcciones.close();
     } catch (EOFException e) {
     }
-    for (Iterator iter = tareas.iterator(); iter.hasNext();)
+    for (Iterator<tareaRed> iter = tareas.iterator(); iter.hasNext();)
       ept.execute((Runnable) iter.next());
     ept.shutdown();
     while (!ept.isTerminated()) {
