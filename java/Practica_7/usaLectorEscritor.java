@@ -1,13 +1,33 @@
+
+/**
+ * Clase usaLectorEscritor
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 01/12/19
+ */
 public class usaLectorEscritor extends Thread {
     lectorEscritor controlador;
     static String contenido;
     int tipo;
 
+    /**
+     * Constructor de clase usaLectorEscritor
+     * 
+     * @param controlador Referencia al controlador de acceso modelado en la clase
+     *                    lectorEscritor
+     * @param tipo        Indica si el proceso es de tipo lector o escritor
+     */
     public usaLectorEscritor(lectorEscritor controlador, int tipo) {
         this.controlador = controlador;
         this.tipo = tipo;
     }
 
+    /**
+     * Metodo concurrente
+     * 
+     * Imprime por pantalla o escribe en la variable compartida segun el proceso sea
+     * de tipo lector o escritor
+     */
     public void run() {
         switch (tipo) {
         case 0:
@@ -26,6 +46,15 @@ public class usaLectorEscritor extends Thread {
 
     }
 
+    /**
+     * Metodo principal
+     * 
+     * Crea una instancia del controlador lectorEscritor, que comparten todas las
+     * instancias concurrentes de clase usaLectorEscritor
+     * 
+     * @param args No se emplean los argumentos de paso por consola
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
         lectorEscritor controlador = new lectorEscritor();
         usaLectorEscritor[] entidades = new usaLectorEscritor[10];
