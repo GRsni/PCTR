@@ -57,6 +57,10 @@ public class UsamonitorImpresion extends Thread {
             int impresora = monitor.coger_impresora();
             imprimir(impresora);
             monitor.soltar_impresora(impresora);
+            try {
+                Thread.sleep((int) (Math.random() * 500));
+            } catch (InterruptedException e) {
+            }
         }
 
     }
@@ -68,11 +72,6 @@ public class UsamonitorImpresion extends Thread {
      */
     private void imprimir(int i) {
         System.out.println("Hilo " + id + " imprimiendo en impresora " + (i + 1));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-        }
-
     }
 
 }
