@@ -2,12 +2,12 @@
 /**
  * Clase Semaforo
  * 
- * Modela un semaforo Djikstra con operaciones wait y signal
+ * Modela un semaforo Djikstra con operaciones wait() y signal()
  * 
  * @author Santiago Jesús Mas Peña
  * @version 12/12/19
  */
-public class Semaforo {
+public class monitorSemaforo {
     private int S;
 
     /**
@@ -15,7 +15,7 @@ public class Semaforo {
      * 
      * @param valor_inicial
      */
-    public Semaforo(int valor_inicial) {
+    public monitorSemaforo(int valor_inicial) {
         S = valor_inicial;
     }
 
