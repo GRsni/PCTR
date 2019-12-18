@@ -13,6 +13,7 @@ public class usaFiloApiAN implements Runnable {
     public static void main(String[] args) {
         int numFilosofos = Integer.parseInt(args[0]);
         filoApiAN m = new filoApiAN(numFilosofos);
+        ExecutorService ejecutor = Executors.newFixedThreadPool(numFilosofos);
         for (int i = 0; i < numFilosofos; i++) {
             new Thread(new usaFiloApiAN(i, m)).start();
         }
