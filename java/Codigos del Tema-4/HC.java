@@ -15,8 +15,13 @@ public class HC extends Thread {
         }
     }
 
-    public HC(Semaphore sA, Semaphore sC){
-        this.sA=sA;
-        this.sC=sC;
+    /**
+     * @param sA
+     * @param sC
+     * @return
+     */
+    public HC(Semaphore sA, Semaphore sC) {
+        this.sA = sA;
+        this.sC = sC;
     }
 }

@@ -10,6 +10,11 @@ public class incConcurrente extends Thread {
   private static int n = 0;
   private int nIter;
 
+  
+  /** 
+   * @param v
+   * @return 
+   */
   public incConcurrente(int v) {
     nIter = v;
   }
@@ -20,7 +25,14 @@ public class incConcurrente extends Thread {
 
   }
 
-  public static void main(String[] args) throws InterruptedException {
+  
+  /** 
+   * @param args
+   * @throws InterruptedException
+   */
+  
+  
+   public static void main(String[] args) throws InterruptedException {
     int p = 100;
     incConcurrente[] h = new incConcurrente[p];
     for (int i = 0; i < h.length; i++)

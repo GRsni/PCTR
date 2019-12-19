@@ -5,11 +5,19 @@ public class usaFiloApiAN implements Runnable {
     filoApiAN monitor;
     int indice;
 
+    /**
+     * @param indice
+     * @param monitor
+     * @return
+     */
     public usaFiloApiAN(int indice, filoApiAN monitor) {
         this.indice = indice;
         this.monitor = monitor;
     }
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         int numFilosofos = Integer.parseInt(args[0]);
         filoApiAN m = new filoApiAN(numFilosofos);

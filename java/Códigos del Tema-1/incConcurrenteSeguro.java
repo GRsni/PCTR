@@ -13,12 +13,22 @@ public class incConcurrenteSeguro
    private static Object lock  = new Object();
    private int nIter;
 
+    
+    /** 
+     * @param run(
+     * @return 
+     */
     public incConcurrenteSeguro(int v) {nIter=v;}
     public void run()
     {
     	for(int i=1;i<=nIter;i++) synchronized(lock){n++;}
 
     }
+    
+    /** 
+     * @param args
+     * @throws InterruptedException
+     */
     public static void main(String[] args)
       throws InterruptedException
     {

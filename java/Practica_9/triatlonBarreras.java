@@ -6,6 +6,11 @@ public class triatlonBarreras implements Runnable {
     static int[] tiempos = new int[100];
     CyclicBarrier barrera;
 
+    /**
+     * @param dorsal
+     * @param barrera
+     * @return
+     */
     public triatlonBarreras(int dorsal, CyclicBarrier barrera) {
         this.dorsal = dorsal;
         this.barrera = barrera;
@@ -40,6 +45,10 @@ public class triatlonBarreras implements Runnable {
         System.err.println(index + " con tiempo " + min);
     }
 
+    /**
+     * @param args
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
         int numCorredores = 100;
         CyclicBarrier barrera = new CyclicBarrier(numCorredores);

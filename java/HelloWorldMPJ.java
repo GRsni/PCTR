@@ -2,6 +2,10 @@ import mpi.*;
 
 public class HelloWorldMPJ {
 
+    /**
+     * @param args[]
+     * @throws Exception
+     */
     public static void main(String args[]) throws Exception {
         MPI.Init(args);
         int me = MPI.COMM_WORLD.Rank();

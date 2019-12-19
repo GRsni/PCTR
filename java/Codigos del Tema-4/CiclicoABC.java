@@ -2,6 +2,9 @@ import java.util.concurrent.Semaphore;
 
 public class CiclicoABC {
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         Semaphore A = new Semaphore(1);
         Semaphore B = new Semaphore(0);
@@ -9,7 +12,7 @@ public class CiclicoABC {
 
         HA ha = new HA(A, B);
         HB hb = new HB(B, C);
-        
+
         HC hc = new HC(A, C);
         ha.start();
         hb.start();

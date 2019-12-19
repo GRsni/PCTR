@@ -13,7 +13,11 @@ public class Usa_semaforo extends Thread {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException{
+    /**
+     * @param args
+     * @throws InterruptedException
+     */
+    public static void main(String[] args) throws InterruptedException {
         Usa_semaforo h1 = new Usa_semaforo(), h2 = new Usa_semaforo();
         h1.start();
         h2.start();

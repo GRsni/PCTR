@@ -1,5 +1,10 @@
   public class PrimosSecuencial{
 	
+  
+  /** 
+   * @param n
+   * @return boolean
+   */
   public static boolean esPrimo(long n){
     if(n<=1) return(false);
     for(long i=2; i<=Math.sqrt(n); i++)
@@ -7,6 +12,11 @@
     return(true);
   }	
 		
+  
+  /** 
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception{
     long intervalo = Long.parseLong(args[0]); 	  
     int total = 0;

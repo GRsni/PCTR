@@ -15,6 +15,11 @@ public class HB extends Thread {
         }
     }
 
+    /**
+     * @param sB
+     * @param sC
+     * @return
+     */
     public HB(Semaphore sB, Semaphore sC) {
         this.sC = sC;
         this.sB = sB;

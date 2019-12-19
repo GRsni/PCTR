@@ -5,23 +5,30 @@
  */
 
 public class ejEntrelazado extends Thread {
-	public static int nIter  = 20;
-	public static int nHilos = 6;
+  public static int nIter = 20;
+  public static int nHilos = 6;
 
-    public ejEntrelazado() {}
-    public void run()
-    {
-      for(int i=0; i<nIter;i++)
-      	System.out.println("Hilo "+this.getName()+" imprimiendo iteración numero "+i);
-    }
+  /**
+   * @param run(
+   * @return
+   */
+  public ejEntrelazado() {
+  }
 
-    public static void main(String[] args)
-    	throws InterruptedException
-    {
-       ejEntrelazado[] t = new ejEntrelazado[nHilos];
-       for(int i=0; i<t.length; i++)
-       	t[i] =new ejEntrelazado();
-       	for(int i=0; i<t.length; i++)
-       	t[i].start();
-    }
+  public void run() {
+    for (int i = 0; i < nIter; i++)
+      System.out.println("Hilo " + this.getName() + " imprimiendo iteraciï¿½n numero " + i);
+  }
+
+  /**
+   * @param args
+   * @throws InterruptedException
+   */
+  public static void main(String[] args) throws InterruptedException {
+    ejEntrelazado[] t = new ejEntrelazado[nHilos];
+    for (int i = 0; i < t.length; i++)
+      t[i] = new ejEntrelazado();
+    for (int i = 0; i < t.length; i++)
+      t[i].start();
+  }
 }

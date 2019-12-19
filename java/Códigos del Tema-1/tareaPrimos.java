@@ -5,11 +5,22 @@ public class tareaPrimos implements Callable{
   private final long lsup;
   private Long total = new Long(0);
    	
+  
+  /** 
+   * @param linf
+   * @param lsup
+   * @return 
+   */
   public tareaPrimos(long linf, long lsup){
     this.linf = linf;
     this.lsup = lsup;
   }
   
+  
+  /** 
+   * @param n
+   * @return boolean
+   */
   public static boolean esPrimo(long n){
     if(n<=1) return(false);
     for(long i=2; i<=Math.sqrt(n); i++)
@@ -17,6 +28,10 @@ public class tareaPrimos implements Callable{
     return(true);
   }	
 		
+  
+  /** 
+   * @return Long
+   */
   public Long call(){   
     for(long i=linf; i<=lsup;i++)
       if(esPrimo(i)) total++;

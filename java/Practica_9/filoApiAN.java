@@ -6,6 +6,10 @@ public class filoApiAN {
     private int[] forks;
     private Condition[] c;
 
+    /**
+     * @param tam
+     * @return
+     */
     public filoApiAN(int tam) {
         forks = new int[tam];
         c = new Condition[tam];
@@ -15,6 +19,9 @@ public class filoApiAN {
         }
     }
 
+    /**
+     * @param i
+     */
     public void take_forks(int i) {
         lock.lock();
         while (forks[i] != 2) {
@@ -28,6 +35,9 @@ public class filoApiAN {
         lock.unlock();
     }
 
+    /**
+     * @param i
+     */
     public void release_forks(int i) {
         lock.lock();
         forks[(i + 1) % forks.length]++;

@@ -3,6 +3,11 @@ import java.io.*;
 public class AutoControl extends Thread {
 	private int Vueltas;
 
+	
+	/** 
+	 * @param Dato
+	 * @return 
+	 */
 	public AutoControl(int Dato) {
 		Vueltas = Dato;
 	}
@@ -23,6 +28,10 @@ public class AutoControl extends Thread {
 		}
 	}
 
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new AutoControl(50).start();
 		new AutoControl(150).start();

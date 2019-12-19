@@ -4,6 +4,12 @@ class Tarea implements Runnable
 {
   private int nVueltas = 10;
   private static int cHilos   =  0;
+  
+  /** 
+   * @param run(
+   * @return 
+   */
+  
   public Tarea(){}
   public void run()
   {

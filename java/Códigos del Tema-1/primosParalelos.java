@@ -3,6 +3,11 @@ import java.util.*;
 
 public class primosParalelos {
 
+  
+  /** 
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
     long nPuntos     = Integer.parseInt(args[0]);
     int  nTareas     = Runtime.getRuntime().availableProcessors();
