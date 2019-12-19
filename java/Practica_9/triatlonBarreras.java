@@ -1,21 +1,37 @@
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
+/**
+ * Clase triatlonBarreras. Modela el comportamiento de 100 corredores de una
+ * carrera en tres fases, con salida simultánea. Al final de la carrera, gana el
+ * proceso que haya obtenido el menor tiempo.
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 19/12/19
+ */
 public class triatlonBarreras implements Runnable {
     int tiempoTotal, dorsal;
     static int[] tiempos = new int[100];
     CyclicBarrier barrera;
 
     /**
-     * @param dorsal
-     * @param barrera
-     * @return
+     * Constructor de clase de tarea Runnable que modela un corredor
+     * 
+     * @param dorsal  Dorsal del corredor
+     * @param barrera Referencia a la barrera
+     * @return Instancia de clase triatlonBarrera
      */
     public triatlonBarreras(int dorsal, CyclicBarrier barrera) {
         this.dorsal = dorsal;
         this.barrera = barrera;
     }
 
+    /**
+     * Metodo concurrente. Los procesos se bloquean en la barrera, hasta su
+     * activación. Esperan un tiempo aleatorio, y lo registran al finalizar su
+     * ejecución
+     * 
+     */
     public void run() {
         try {
             int i = barrera.await();
@@ -33,6 +49,10 @@ public class triatlonBarreras implements Runnable {
 
     }
 
+    /**
+     * Función auxiliar que busca el corredor con menor tiempo en el vector de
+     * resultados, y devuelve su indice
+     */
     public static void buscaGanador() {
         int min = 10000;
         int index = -1;
@@ -46,8 +66,12 @@ public class triatlonBarreras implements Runnable {
     }
 
     /**
-     * @param args
-     * @throws InterruptedException
+     * Metodo principal, crea las 100 tareas, e inicializa la barrera tres veces,
+     * para simular las tres fases de la carrera
+     * 
+     * @param args Argumentos de consola, no se utilizan
+     * @throws InterruptedException El metodo join de la clase Thread puede devolver
+     *                              Interrupciones de ejecución
      */
     public static void main(String[] args) throws InterruptedException {
         int numCorredores = 100;

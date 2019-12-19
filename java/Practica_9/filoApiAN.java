@@ -1,14 +1,24 @@
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Clase filoApiAN. Modela un monitor de problema de folisofos comensales
+ * mediante ReentrantLock y Condition
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 19/12/19
+ */
 public class filoApiAN {
     private ReentrantLock lock = new ReentrantLock();
     private int[] forks;
     private Condition[] c;
 
     /**
-     * @param tam
-     * @return
+     * Constructor de clase, incializa el tamaño del vector de tenedores y las
+     * condiciones de control
+     * 
+     * @param tam Tamaño del vector de tenedores
+     * @return Instancia de filoApiAN
      */
     public filoApiAN(int tam) {
         forks = new int[tam];
@@ -20,7 +30,10 @@ public class filoApiAN {
     }
 
     /**
-     * @param i
+     * Metodo de adquisición de tenedores. Si no estan libres ambos tenedores,
+     * bloquea al proceso
+     * 
+     * @param i Indice del filosofo que toma los tenedores
      */
     public void take_forks(int i) {
         lock.lock();
@@ -36,7 +49,10 @@ public class filoApiAN {
     }
 
     /**
-     * @param i
+     * Metodo de liberación de tenedores. El filosofo i suelta los dos tenedores que
+     * tiene adquiridos
+     * 
+     * @param i Indice del filosofo que suelta los tenedores
      */
     public void release_forks(int i) {
         lock.lock();

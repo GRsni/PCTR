@@ -1,6 +1,13 @@
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Clase RWMonitorAN. Modela un monitor de tipo lector-escritor mediante
+ * ReentrantLock y Condition
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 19/12/19
+ */
 public class RWMonitorAN {
     int lectores;
     boolean escribiendo;
@@ -8,7 +15,10 @@ public class RWMonitorAN {
     Condition esperaL, esperaE;
 
     /**
-     * @return
+     * Constructor de clase que inicializa las variables de condición y valores
+     * iniciales
+     * 
+     * @return Instancia de la clase RWMonitorAN
      */
     public RWMonitorAN() {
         esperaL = lock.newCondition();
@@ -17,6 +27,9 @@ public class RWMonitorAN {
         escribiendo = false;
     }
 
+    /**
+     * Protocolo de entrada para los procesos lectores
+     */
     public void startRead() {
         lock.lock();
         while (escribiendo) {
@@ -30,6 +43,9 @@ public class RWMonitorAN {
         lock.unlock();
     }
 
+    /**
+     * Protocolo de salida para los procesos lectores
+     */
     public void endRead() {
         lock.lock();
         lectores--;
@@ -40,6 +56,9 @@ public class RWMonitorAN {
         lock.unlock();
     }
 
+    /**
+     * Protocolo de entrada para los procesos escritores
+     */
     public void startWrite() {
         lock.lock();
         while (lectores > 0 || escribiendo) {
@@ -53,6 +72,9 @@ public class RWMonitorAN {
         lock.unlock();
     }
 
+    /**
+     * Protocolo de salida para los procesos escritores
+     */
     public void endWrite() {
         lock.lock();
         escribiendo = false;
