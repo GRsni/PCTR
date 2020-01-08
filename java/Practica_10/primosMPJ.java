@@ -1,10 +1,19 @@
-// COMPILACION:javac -cp .;%MPJ_HOME%/lib/mpj.jar distribInteg.java
-// EJECUCION: mpjrun.bat -np 4 distribInteg
-
 import mpi.*;
 
+/**
+ * Clase primosMPJ
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 08/01/20
+ */
 public class primosMPJ {
 
+    /**
+     * Metodo principal, inicializa el comunicador MPI, y realiza el conteo de
+     * primos
+     * 
+     * @param args Recibe por consola el rango de numeros a comprobar
+     */
     public static void main(String[] args) {
         int id, numProcs;
         long[] n = new long[1];
@@ -37,6 +46,12 @@ public class primosMPJ {
         MPI.finalize();
     }
 
+    /**
+     * Funcione estatica que comprueba si un numero es primo o no
+     * 
+     * @param n Numero a comprobar
+     * @return boolean Devuelve si el numero es primo o no
+     */
     private static boolean esPrimo(long n) {
         boolean esPrimo = true;
         for (int i = 2; i <= Math.sqrt(n) && esPrimo; i++) {

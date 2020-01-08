@@ -4,16 +4,34 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * Clase primosCallable. Realiza el conteo de primos dado un rango mediante
+ * tareas concurrentes de tipo Callable
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 08/01/20
+ */
 public class primosCallable implements Callable<Long> {
     int id;
     static long rango;
     static long primosTotales = 0;
     Long misPrimos = new Long(0);
 
+    /**
+     * Constructor de clase
+     * 
+     * @param id Identificador de la tarea
+     */
     public primosCallable(int id) {
         this.id = id;
     }
 
+    /**
+     * Metodo call a Future, devuelve el numero de primos en el rango asociado a la
+     * tarea
+     * 
+     * @return Long Numero de primos encontrados
+     */
     public Long call() {
         for (long i = rango * id + 1; i < rango * (id + 1); i++) {
             if (esPrimo(i)) {
@@ -23,6 +41,12 @@ public class primosCallable implements Callable<Long> {
         return misPrimos;
     }
 
+    /**
+     * Función que calcula si un numero es primo o no
+     * 
+     * @param n Numero a comprobar
+     * @return boolean Devuelve si el numero es primo o no
+     */
     private boolean esPrimo(long n) {
         boolean esPrimo = true;
         for (int i = 2; i <= Math.sqrt(n) && esPrimo; i++) {
@@ -33,6 +57,13 @@ public class primosCallable implements Callable<Long> {
         return esPrimo;
     }
 
+    /**
+     * Metodo principal. Crea 4 tareas Callable, que calculan el numero de primos en
+     * su fragmento de rango, y almancenan el resultado en objetos de clase
+     * Future<Long>
+     * 
+     * @param args Recibe por consola el rango de numeros a comprobar
+     */
     public static void main(String[] args) {
         long max = Long.parseLong(args[0]);
         int numHilos = 4;
