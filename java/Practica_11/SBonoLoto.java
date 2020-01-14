@@ -2,6 +2,7 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.rmi.registry.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,12 +14,25 @@ public class SBonoLoto extends UnicastRemoteObject implements IBonoLoto {
         resetServidor();
     }
 
+    public static ArrayList<Integer> cargarListaDePosibilidades() {
+        ArrayList<Integer> lista = new ArrayList<>();
+        for (int i = 1; i < 50; i++) {
+            lista.add(i);
+        }
+        return lista;
+    }
+
     public void resetServidor() throws RemoteException {
         cerrojo.lock();
+        ArrayList<Integer> lista = cargarListaDePosibilidades();
+
         System.out.println("Obteniendo nuevos numeros");
         for (int i = 0; i < 6; i++) {
-            numeros[i] = (int) (Math.random() * 50);
+            int index = (int) (Math.random() * lista.size());
+            numeros[i] = lista.get(index);
+            lista.remove(index);
         }
+        Arrays.sort(numeros);
         System.out.println(Arrays.toString(numeros));
         cerrojo.unlock();
     }
@@ -26,6 +40,10 @@ public class SBonoLoto extends UnicastRemoteObject implements IBonoLoto {
     public boolean compApuesta(int[] apuesta) throws RemoteException {
         cerrojo.lock();
         boolean res = Arrays.equals(numeros, apuesta);
+        if (res) {
+            System.out.println("Han acertado los numeros!");
+            resetServidor();
+        }
         cerrojo.unlock();
         return res;
     }
@@ -35,9 +53,6 @@ public class SBonoLoto extends UnicastRemoteObject implements IBonoLoto {
         IBonoLoto ORemoto = new SBonoLoto();
 
         Naming.rebind("bonoloto", ORemoto);
-
-        System.out.println("servidor preparado con valores:");
-        System.out.println(Arrays.toString(numeros));
 
     }
 }
