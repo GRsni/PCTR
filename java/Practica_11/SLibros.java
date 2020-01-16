@@ -3,8 +3,6 @@ import java.rmi.server.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
-import java.rmi.registry.*;
-import java.net.*;
 
 public class SLibros extends UnicastRemoteObject implements ILibros {
     static ArrayList<Libro> bibliografia = new ArrayList<Libro>();
