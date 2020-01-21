@@ -1,16 +1,13 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class conVolSecuencial {
     private int[][] A;
-    private static int[][] ENFOCAR_MASK = { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, } };
+    private static int[][] ENFOCAR_MASK = { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, 0 } };
     private static int[][] REALZAR_BORDES_MASK = { { 0, 0, 0 }, { -1, 1, 0 }, { 0, 0, 0 } };
     private static int[][] DETECTAR_BORDES_MASK = { { 0, 1, 0 }, { 1, 4, 1 }, { 0, 1, 0 } };
     private static int[][] SOBEL_MASK = { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
     private static int[][] SHARPEN_MASK = { { 1, -2, 1 }, { -2, 5, 2 }, { 1, -2, 1 } };
-
-    private enum Mascaras {
-        Enfocar, Realzar, Detectar, Shobel, Sharpen;
-    }
 
     public conVolSecuencial(int tam) {
         A = inicializarMatriz(tam);
@@ -25,10 +22,16 @@ public class conVolSecuencial {
     }
 
     public static void main(String[] args) {
+        if (args[0] == null) {
+            System.out.println("Introduce el tamaño de la matriz a calcular.");
+            System.exit(-1);
+        }
         int tamA = Integer.parseInt(args[0]);
         conVolSecuencial conv = new conVolSecuencial(tamA);
-        int[][] res = elegirMatrixConvolucion(Mascaras.Detectar);
+        int[][] mascaraConv = conv.elegirMatrixConvolucion();
+        int[][] res = new int[tamA][tamA];
 
+        long startTime = System.nanoTime();
         for (int i = 0; i < tamA; i++) {
             for (int j = 0; j < tamA; j++) {
                 int sum = 0;
@@ -37,35 +40,49 @@ public class conVolSecuencial {
                     for (int m = -1; m <= 1; m++) {
                         // System.out.print((i + k) + " : " + (j + m) + "=" + C[k + 1][m + 1] + " || ");
                         if (i + k >= 0 && i + k < tamA && j + m >= 0 && j + m < tamA) {
-                            sum += conv.A[i + k][j + m] * C[k + 1][m + 1];
+                            sum += conv.A[i + k][j + m] * mascaraConv[k + 1][m + 1];
                         }
                     }
                 }
                 res[i][j] = sum;
             }
         }
-        for (int i = 0; i < tamA; i++) {
-            System.out.println(Arrays.toString(res[i]));
-        }
+        System.out.println("Convolucion acabada en " + (System.nanoTime() - startTime) / 1000000000.0 + " segundos.");
+        /*
+         * for (int i = 0; i < tamA; i++) { System.out.println(Arrays.toString(res[i]));
+         * }
+         */
     }
 
-    int[][] elegirMatrixConvolucion(int opcion) {
+    public int[][] elegirMatrixConvolucion() {
+        Scanner in = new Scanner(System.in);
+        int[][] mascara;
+        System.out.println(
+                "Elige la mascara de convolución\n1:Enfocar\n2:Realzar bordes\n3:Detectar bordes\n4:Filtro Sobel\n5:Filtro Sharpen");
+        int opcion = in.nextInt();
         switch (opcion) {
-        case Mascaras.Enfocar:
-            return ENFOCAR_MASK;
+        case 1:
+            mascara = ENFOCAR_MASK;
             break;
-        case Mascaras.Detectar:
-            return DETECTAR_BORDES_MASK;
+        case 2:
+            mascara = REALZAR_BORDES_MASK;
             break;
-        case Mascaras.Detectar:
-            return DETECTAR_BORDES_MASK;
+        case 3:
+            mascara = DETECTAR_BORDES_MASK;
             break;
-        case Mascaras.Shobel:
-            return SOBEL_MASK;
+        case 4:
+            mascara = SOBEL_MASK;
             break;
-        case Mascaras.Sharpen:
-            return SHARPEN_MASK;
+        case 5:
+            mascara = SHARPEN_MASK;
+            break;
+        default:
+            mascara = new int[3][3];
+            System.out.println("Opcion fuera de rango.");
+            System.exit(-1);
             break;
         }
+        in.close();
+        return mascara;
     }
 }
