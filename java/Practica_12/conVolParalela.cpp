@@ -5,7 +5,8 @@
 #include <chrono>
 #include <thread>
 
-const int tamA = 1000;
+const int tamA = 10000;
+const int numHilos = 2;
 
 short MASKS[5][3][3] = {{{0, -1, 0}, {-1, 5, -1}, {0, -1, 0}},
                         {{0, 0, 0}, {-1, 1, 0}, {0, 0, 0}},
@@ -64,7 +65,6 @@ int main()
         std::cout << "Opcion no valida. Saliendo de programa." << std::endl;
         exit(-1);
     }
-    const int numHilos = 2;
 
     std::thread hilos[numHilos];
     start = std::chrono::system_clock::now();

@@ -4,7 +4,7 @@
 #include <ctime>
 #include <chrono>
 
-const int tamA = 1000;
+const int tamA = 10000;
 
 short ENFOCAR_MASK[3][3] = {{0, -1, 0}, {-1, 5, -1}, {0, -1, 0}};
 short REALZAR_BORDES_MASK[3][3] = {{0, 0, 0}, {-1, 1, 0}, {0, 0, 0}};
@@ -47,7 +47,6 @@ int main()
 {
     srand(time(NULL));
     std::vector<std::vector<int>> matA(tamA, std::vector<int>(tamA));
-    std::cout << "test";
     short matConv[3][3];
 
     for (int i = 0; i < tamA; i++)
