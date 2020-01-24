@@ -1,3 +1,7 @@
+//Programa conVolParalela. Realiza la convolucion de una matriz de enteros empleando tareas concurrentes.
+//Santiago Jesús Mas Peña
+//22/01/20
+
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -5,9 +9,12 @@
 #include <chrono>
 #include <thread>
 
-const int tamA = 10000;
-const int numHilos = 2;
+//Tamaño de la matriz a convolucionar.
+const int tamA = 1000;
+//Numero de tareas concurrentesa declarar.
+const int numHilos = 14;
 
+//Mascaras de convolución ya declaradas.
 short MASKS[5][3][3] = {{{0, -1, 0}, {-1, 5, -1}, {0, -1, 0}},
                         {{0, 0, 0}, {-1, 1, 0}, {0, 0, 0}},
                         {{0, 1, 0}, {1, 4, 1}, {0, 1, 0}},
@@ -17,6 +24,11 @@ short MASKS[5][3][3] = {{{0, -1, 0}, {-1, 5, -1}, {0, -1, 0}},
 std::vector<std::vector<int>> matrix(tamA, std::vector<int>(tamA));
 std::vector<std::vector<int>> res(tamA, std::vector<int>(tamA));
 
+/**
+ * Metodo que realiza la convolucion de la matriz matrix, desde 
+ * la fila startRow hasta la fila endRow, empleando la mascara
+ * de convolucion MASKS[matConvIndex]
+ */
 void realizarConvolucion(int matConvIndex, int startRow, int endRow)
 {
     std::vector<std::vector<int>> res(tamA, std::vector<int>(tamA));
@@ -26,12 +38,10 @@ void realizarConvolucion(int matConvIndex, int startRow, int endRow)
         for (int j = 0; j < tamA; j++)
         {
             int sum = 0;
-            // System.out.println("row: " + row + " col: " + col + " => " + A[row][col]);
             for (int k = -1; k <= 1; k++)
             {
                 for (int m = -1; m <= 1; m++)
                 {
-                    // System.out.print((i + k) + " : " + (j + m) + "=" + C[k + 1][m + 1] + " || ");
                     if (i + k >= 0 && i + k < tamA && j + m >= 0 && j + m < tamA)
                     {
                         sum += matrix[i + k][j + m] * MASKS[matConvIndex][k + 1][m + 1];
@@ -43,6 +53,11 @@ void realizarConvolucion(int matConvIndex, int startRow, int endRow)
     }
 }
 
+/**
+ * Metodo principal. Inicializa la matriz aleatoria original,
+ * pide al usuario que elija la matriz de convolucion, y 
+ * realiza la convolucion creando numHilos tareas concurrentes.
+ */
 int main()
 {
     srand(time(NULL));
@@ -58,21 +73,21 @@ int main()
     std::chrono::time_point<std::chrono::system_clock> start, end;
 
     int opcionMascara;
-    std::cout << "Elige la mascara de convolución\n0:Enfocar\n1:Realzar bordes\n2:Detectar bordes\n3:Filtro Sobel\n4:Filtro Sharpen" << std::endl;
+    std::cout << "Elige la mascara de convolución\n1:Enfocar\n2:Realzar bordes\n3:Detectar bordes\n4:Filtro Sobel\n5:Filtro Sharpen" << std::endl;
     std::cin >> opcionMascara;
-    if (opcionMascara < 0 || opcionMascara > 4)
+    if (opcionMascara < 1 || opcionMascara > 5)
     {
         std::cout << "Opcion no valida. Saliendo de programa." << std::endl;
         exit(-1);
     }
-
+    //Creacion de hilos concurrentes.
     std::thread hilos[numHilos];
     start = std::chrono::system_clock::now();
     for (int i = 0; i < numHilos; i++)
     {
         int startRow = tamA / numHilos * i;
         int endRow = tamA / numHilos * (i + 1);
-        hilos[i] = std::thread(realizarConvolucion, opcionMascara, startRow, endRow);
+        hilos[i] = std::thread(realizarConvolucion, opcionMascara - 1, startRow, endRow);
     }
     for (int i = 0; i < numHilos; i++)
     {

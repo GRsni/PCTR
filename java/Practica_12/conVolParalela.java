@@ -3,6 +3,13 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Clase conVolParalera. Realiza la convolucion de una matriz de enteros
+ * mediante el uso de tareas concurrentes.
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 21/01/20
+ */
 public class conVolParalela implements Runnable {
     static int tamA;
     static private int[][] matA, res, mascara;
@@ -13,6 +20,14 @@ public class conVolParalela implements Runnable {
     private static int[][] SHARPEN_MASK = { { 1, -2, 1 }, { -2, 5, 2 }, { 1, -2, 1 } };
     int startRow, endRow, id;
 
+    /**
+     * Constructor de clase conVolParalela. Indica a cada hilo la fias de inicio y
+     * fin que deben procesar.
+     * 
+     * @param startRow Fila inicial a procesar
+     * @param endRow   Ultima fila a procesar
+     * @param id       Identificador de tarea
+     */
     public conVolParalela(int startRow, int endRow, int id) {
         this.endRow = endRow;
         this.startRow = startRow;
@@ -20,6 +35,10 @@ public class conVolParalela implements Runnable {
         System.out.println("start: " + startRow + " end: " + endRow);
     }
 
+    /**
+     * Metodo concurrente. Realiza el proceso de convolucion de la matriz matA,
+     * desde la fila startRow hasta la fila endRow.
+     */
     public void run() {
         for (int i = startRow; i < endRow; i++) {
             for (int j = 0; j < tamA; j++) {
@@ -39,6 +58,12 @@ public class conVolParalela implements Runnable {
         }
     }
 
+    /**
+     * Inicializa la matriz aleatoria de enteros.
+     * 
+     * @param tam Tamaño de la matriz a generar.
+     * @return int[][] Devuelve una matriz aleatoria de tamaño tam x tam.
+     */
     private static int[][] inicializarMatriz(int tam) {
         int[][] out = new int[tam][tam];
         for (int i = 0; i < tam; i++) {
@@ -49,6 +74,11 @@ public class conVolParalela implements Runnable {
         return out;
     }
 
+    /**
+     * Menu de selección de mascara de convolucion.
+     * 
+     * @return int[][] Devuelve la mascara de convolucion seleccionada.
+     */
     public static int[][] elegirMatrixConvolucion() {
         Scanner in = new Scanner(System.in);
         int[][] mascara;
@@ -81,6 +111,14 @@ public class conVolParalela implements Runnable {
         return mascara;
     }
 
+    /**
+     * Metodo principal, inicializa la matriz original, pide al usuario la matriz de
+     * convolución, y lanza las tareas concurrentes.
+     * 
+     * @param args Recibe por consola el tamaño de la matriz original y el numero de
+     *             hilos concurrentes a emplear.
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
 
         if (args[0] == null) {

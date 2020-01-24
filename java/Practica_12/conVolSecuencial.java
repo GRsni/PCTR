@@ -1,6 +1,13 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Clase conVolSecuencial. Realiza la convolucion de una matriz de enteros,
+ * permitiendo la eleccion de la mascara de convolucion.
+ * 
+ * @author Santiago Jesús Mas Peña
+ * @version 21/01/20
+ */
 public class conVolSecuencial {
     private int[][] A;
     private static int[][] ENFOCAR_MASK = { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, 0 } };
@@ -9,10 +16,22 @@ public class conVolSecuencial {
     private static int[][] SOBEL_MASK = { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
     private static int[][] SHARPEN_MASK = { { 1, -2, 1 }, { -2, 5, 2 }, { 1, -2, 1 } };
 
+    /**
+     * Constructor de clase, inicializa la matriz original con valores aleatorios
+     * entre 0 y 255.
+     * 
+     * @param tam Tamaño de la matriz original
+     */
     public conVolSecuencial(int tam) {
         A = inicializarMatriz(tam);
     }
 
+    /**
+     * Metodo que crea e inicializa la matriz de enteros aleatoria.
+     * 
+     * @param tam Tamaño de la matriz a generar.
+     * @return int[][] Devuelve la matriz aleatoria de tamaño tam x tam.
+     */
     private int[][] inicializarMatriz(int tam) {
         int[][] out = new int[tam][tam];
         for (int i = 0; i < tam * tam; i++) {
@@ -21,6 +40,12 @@ public class conVolSecuencial {
         return out;
     }
 
+    /**
+     * Metodo principal. Muestra un menu al usuario para que elija la mascara de
+     * convolucion, genera la matriz aleatoria y realiza la convolucion.
+     * 
+     * @param args Recibe por consola el tamaño de la matriz a generar.
+     */
     public static void main(String[] args) {
         if (args[0] == null) {
             System.out.println("Introduce el tamaño de la matriz a calcular.");
@@ -35,10 +60,8 @@ public class conVolSecuencial {
         for (int i = 0; i < tamA; i++) {
             for (int j = 0; j < tamA; j++) {
                 int sum = 0;
-                // System.out.println("row: " + row + " col: " + col + " => " + A[row][col]);
                 for (int k = -1; k <= 1; k++) {
                     for (int m = -1; m <= 1; m++) {
-                        // System.out.print((i + k) + " : " + (j + m) + "=" + C[k + 1][m + 1] + " || ");
                         if (i + k >= 0 && i + k < tamA && j + m >= 0 && j + m < tamA) {
                             sum += conv.A[i + k][j + m] * mascaraConv[k + 1][m + 1];
                         }
@@ -48,12 +71,13 @@ public class conVolSecuencial {
             }
         }
         System.out.println("Convolucion acabada en " + (System.nanoTime() - startTime) / 1000000000.0 + " segundos.");
-        /*
-         * for (int i = 0; i < tamA; i++) { System.out.println(Arrays.toString(res[i]));
-         * }
-         */
     }
 
+    /**
+     * Metodo que muestra el menu de selección de matriz de convolución.
+     * 
+     * @return int[][] Devuelve la matriz de convolución seleccionada.
+     */
     public int[][] elegirMatrixConvolucion() {
         Scanner in = new Scanner(System.in);
         int[][] mascara;
