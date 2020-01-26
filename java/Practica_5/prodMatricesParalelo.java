@@ -61,7 +61,7 @@ public class prodMatricesParalelo implements Runnable {
         float coefBloqueo = 0.25f;
         int numHilos = (int) (numNucleos / (1 - coefBloqueo));
 
-        ExecutorService ejecutor = Executors.newFixedThreadPool(numHilos);
+        ExecutorService ejecutor = Executors.newFixedThreadPool(12);
         System.out.println("Numero de hilos: " + numHilos);
         long timeStart = System.nanoTime();
         for (int i = 0; i < numHilos; i++) {
